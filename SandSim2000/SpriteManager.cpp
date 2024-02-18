@@ -4,13 +4,30 @@
 
 SpriteManager::SpriteManager(const char* filePath)
 {
-	spriteList.push_back(std::make_pair("RedBaron", SpriteSheet(filePath, 3, 3)));
+	spriteSheetList.push_back(std::make_pair("RedBaron", SpriteSheet(filePath, 3, 3)));
 }
 
 sf::Sprite* SpriteManager::GetSprite(std::string spriteSheetID, int spriteIndex)
 {
-	SpriteSheet currentSprite;
-	
-	auto it = std::find_if(spriteList.begin(), spriteList.end(), spriteSheetID) 
+	for (auto it = spriteSheetList.begin(); it != spriteSheetList.end(); ++it) 
+	{
+		if (it->first == spriteSheetID) 
+		{
+			return it->second.getSprite(spriteIndex);
+		}
+	}
+	std::cerr << "[INVALID SPRITE NOT IN LIST]" << std::endl;
+}
+
+SpriteSheet& SpriteManager::GetSpriteSheet(std::string spriteSheetID)
+{
+	for (auto it = spriteSheetList.begin(); it != spriteSheetList.end(); ++it)
+	{
+		if (it->first == spriteSheetID)
+		{
+			return it->second;
+		}
+	}
+	std::cerr << "[INVALID SPRITE NOT IN LIST]" << std::endl;
 }
 

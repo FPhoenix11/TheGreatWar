@@ -8,7 +8,10 @@ class SpriteManager
 {
 public:
     SpriteManager(const char* filePath);
-    std::list<std::pair<std::string, SpriteSheet>> spriteList;
+    SpriteManager() {};
+    std::list<std::pair<std::string, SpriteSheet>> spriteSheetList;
 
     sf::Sprite* GetSprite(std::string spriteSheetID, int spriteIndex);
+
+    SpriteSheet& GetSpriteSheet(std::string spriteSheetID);
 };
